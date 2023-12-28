@@ -1,0 +1,143 @@
+touch internsctl
+nano internsctl
+#!/bin/bash
+
+# internsctl - Custom Linux command for operations
+# Version: v0.1.0
+
+# Define usage function
+usage() {
+    echo "Usage: internsctl [options]"
+    echo "Options:"
+    echo "  -h, --help     Show help message"
+    echo "  -v, --version  Show version information"
+    echo "  -a, --action   Specify the action to perform"
+}
+
+# Define version function
+version() {
+    echo "internsctl v0.1.0"
+}
+
+# Parse command-line options
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        -v|--version)
+            version
+            exit 0
+            ;;
+        -a|--action)
+            shift
+            action="$1"
+            # Perform operations based on the specified action
+            case $action in
+                "operation1")
+                    echo "Performing Operation 1"
+                    # Add your code for Operation 1 here
+                    ;;
+                "operation2")
+                    echo "Performing Operation 2"
+                    # Add your code for Operation 2 here
+                    ;;
+                *)
+                    echo "Invalid action. Available actions: operation1, operation2"
+                    exit 1
+                    ;;
+            esac
+            ;;
+        *)
+            echo "Invalid option: $1"
+            usage
+            exit 1
+            ;;
+    esac
+    shift
+done
+
+# If no options are provided, show usage information
+if [ "$#" -eq 0 ]; then
+    usage
+    exit 1
+fi
+chmod +x internsctl
+
+./internsctl -v
+
+#!/bin/bash
+
+# internsctl - Custom Linux command for operations
+# Version: v0.1.0
+
+# Define usage function
+usage() {
+    echo "Usage: internsctl [options]"
+    echo "Options:"
+    echo "  cpu getinfo     Get CPU information"
+    echo "  memory getinfo  Get memory information"
+}
+
+# Define function to get CPU information
+get_cpu_info() {
+    lscpu
+}
+
+# Define function to get memory information
+get_memory_info() {
+    free -h
+}
+
+# Parse command-line options
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        cpu)
+            shift
+            case $1 in
+                getinfo)
+                    get_cpu_info
+                    exit 0
+                    ;;
+                *)
+                    echo "Invalid CPU subcommand. Available subcommands: getinfo"
+                    exit 1
+                    ;;
+            esac
+            ;;
+        memory)
+            shift
+            case $1 in
+                getinfo)
+                    get_memory_info
+                    exit 0
+                    ;;
+                *)
+                    echo "Invalid memory subcommand. Available subcommands: getinfo"
+                    exit 1
+                    ;;
+            esac
+            ;;
+        *)
+            echo "Invalid option: $1"
+            usage
+            exit 1
+            ;;
+    esac
+    shift
+done
+
+# If no options are provided, show usage information
+if [ "$#" -eq 0 ]; then
+    usage
+    exit 1
+fi
+
+chmod +x internsctl
+
+./internsctl cpu getinfo
+
+./internsctl memory getinfo
+
+
